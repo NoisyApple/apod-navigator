@@ -1,6 +1,10 @@
 import "./APODNavigator.scss"
 
+import useAPOD from "../../hooks/useAPOD"
+
 const APODNavigator = () => {
+  const data = useAPOD("2022-02-18")
+
   return (
     <div className="apod-navigator">
       <section className="apod-navigator__header">
@@ -12,6 +16,11 @@ const APODNavigator = () => {
         </h1>
         <p className="apod-navigator__subtitle">Navigator</p>
       </section>
+      <pre>
+        <code style={{ whiteSpace: "pre-wrap" }}>
+          {JSON.stringify(data, null, 2)}
+        </code>
+      </pre>
     </div>
   )
 }
