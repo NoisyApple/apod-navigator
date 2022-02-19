@@ -1,3 +1,5 @@
+import "./DateSelector.scss"
+
 import { ChangeEvent, useState } from "react"
 
 import { getCurrentDate } from "../../../utils/utils"
@@ -27,7 +29,9 @@ const DateSelector = () => {
 
   return (
     <div className="date-selector">
-      <form action="" className="date-selector__form">
+      <form className="date-selector__form">
+        <h3 className="date-selector__form-title">Select a date</h3>
+
         <div className="date-selector__input-wrapper">
           <label htmlFor="isRangeEnabled" className="date-selector__label">
             Search by range:
@@ -38,6 +42,7 @@ const DateSelector = () => {
             type="checkbox"
             name="isRangeEnabled"
             id="isRangeEnabled"
+            className="date-selector__input"
           />
         </div>
 
@@ -52,6 +57,7 @@ const DateSelector = () => {
             name="initialDate"
             id="initialDate"
             max={getCurrentDate()}
+            className="date-selector__input"
           />
         </div>
 
@@ -69,13 +75,16 @@ const DateSelector = () => {
               min={formData.initialDate}
               max={getCurrentDate()}
               disabled={!formData.isRangeEnabled}
+              className="date-selector__input"
             />
           </div>
         )}
+
+        <button className="date-selector__submit-button">SUBMIT</button>
       </form>
-      <pre>
+      {/* <pre>
         <code>{JSON.stringify(formData, null, 2)}</code>
-      </pre>
+      </pre> */}
     </div>
   )
 }
