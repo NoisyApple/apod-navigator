@@ -1,4 +1,10 @@
+@use "./scss/index.scss" as *;
+
+$site-background-color: lighten-7($color-dodger-blue);
+
 * {
+  @extend %font-sans;
+
   margin: 0;
   box-sizing: border-box;
 }
@@ -9,4 +15,5 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: $site-background-color;
 }

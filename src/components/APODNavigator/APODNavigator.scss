@@ -1,0 +1,31 @@
+@use "../../scss/index.scss" as *;
+
+.apod-navigator {
+  padding: $space-3;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    @extend %h3-sans;
+
+    font-weight: $font-weight-regular;
+  }
+
+  &__drop-cap {
+    @extend %h1-sans;
+
+    font-weight: $font-weight-black;
+  }
+
+  &__subtitle {
+    @extend %h2-sans;
+
+    font-weight: $font-weight-black;
+
+    text-transform: uppercase;
+  }
+}
