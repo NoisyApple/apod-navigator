@@ -12,10 +12,15 @@ const useAPOD: useAPODOverload = (date: string | string[]) => {
   const [data, setData] = useState<object>({})
 
   useEffect(() => {
-    let datesArray = typeof date === "string" ? [date] : date
-    Promise.all(
-      datesArray.map((d) => fetch(BASE_URL + d).then((r) => r.json()))
-    ).then((retrievedData) => setData({ data: retrievedData }))
+    const datesArray = typeof date === "string" ? [date] : date
+
+    if (datesArray[0] !== "") {
+      Promise.all(
+        datesArray.map((date) => fetch(BASE_URL + date).then((r) => r.json()))
+      ).then((retrievedData) => setData({ data: retrievedData }))
+    } else {
+      setData({ data: [] })
+    }
   }, [])
 
   return data
