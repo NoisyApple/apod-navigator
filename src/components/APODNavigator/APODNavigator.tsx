@@ -1,12 +1,21 @@
 import "./APODNavigator.scss"
 
-import useAPOD from "../../hooks/useAPOD"
+import { useEffect } from "react"
+
 import DateSelector from "./DateSelector/DateSelector"
+import { fetchAPOD } from "../../api/APODService"
 import { useSelectedDates } from "../../context/SelectedDatesContext"
+import { useAPODAPI } from "../../context/APODDataContext"
 
 const APODNavigator = () => {
-  const data = useAPOD("")
-  const { state } = useSelectedDates()
+  const { state: apodAPIData, dispatch } = useAPODAPI()
+  const { state: datesData } = useSelectedDates()
+
+  useEffect(() => {
+    fetchAPOD(datesData.selectedDates).then((data) => {
+      dispatch({ type: "FETCH_DATA", payload: data })
+    })
+  }, [datesData])
 
   return (
     <div className="apod-navigator">
@@ -24,8 +33,8 @@ const APODNavigator = () => {
       </section>
       <pre>
         <code style={{ whiteSpace: "pre-wrap" }}>
-          {/* {JSON.stringify(data, null, 2)} */}
-          {JSON.stringify(state, null, 2)}
+          {JSON.stringify(datesData, null, 2)}
+          {JSON.stringify(apodAPIData, null, 2)}
         </code>
       </pre>
     </div>

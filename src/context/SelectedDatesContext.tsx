@@ -17,7 +17,7 @@ const SelectedDatesContext = createContext<
   | undefined
 >(undefined)
 
-function selectedDatesReducer(state: State, action: Action): State {
+const selectedDatesReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "SET_DATES":
       return {
@@ -27,7 +27,11 @@ function selectedDatesReducer(state: State, action: Action): State {
   }
 }
 
-export function SelectedDatesProvider({ children }: { children: ReactNode }) {
+export const SelectedDatesProvider = ({
+  children,
+}: {
+  children: ReactNode
+}) => {
   const [state, dispatch] = useReducer(selectedDatesReducer, defaultState)
 
   return (
@@ -37,7 +41,7 @@ export function SelectedDatesProvider({ children }: { children: ReactNode }) {
   )
 }
 
-export function useSelectedDates() {
+export const useSelectedDates = () => {
   const context = useContext(SelectedDatesContext)
 
   if (!context)
