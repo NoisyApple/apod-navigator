@@ -1,0 +1,39 @@
+@use "../../scss/index.scss" as *;
+
+.apod-navigator {
+  padding: $space-3;
+
+  &__header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__cards-section {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: $space-3;
+    padding: 0 $space-4;
+    margin-top: $space-5;
+  }
+
+  &__title {
+    @extend %h3-sans;
+
+    font-weight: $font-weight-regular;
+  }
+
+  &__drop-cap {
+    @extend %h1-sans;
+
+    font-weight: $font-weight-black;
+  }
+
+  &__subtitle {
+    @extend %h2-sans;
+
+    font-weight: $font-weight-black;
+
+    text-transform: uppercase;
+  }
+}
