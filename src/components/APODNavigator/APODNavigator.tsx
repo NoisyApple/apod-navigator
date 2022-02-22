@@ -3,9 +3,11 @@ import "./APODNavigator.scss"
 import { useEffect } from "react"
 
 import DateSelector from "./DateSelector/DateSelector"
+import APODCard from "./APODCard/APODCard"
+
 import { fetchAPOD } from "../../api/APODService"
 import { useSelectedDates } from "../../context/SelectedDatesContext"
-import { useAPODAPI } from "../../context/APODDataContext"
+import { APODElement, useAPODAPI } from "../../context/APODDataContext"
 
 const APODNavigator = () => {
   const { state: apodAPIData, dispatch } = useAPODAPI()
@@ -31,12 +33,19 @@ const APODNavigator = () => {
       <section className="apod-navigator__date-selector-section">
         <DateSelector />
       </section>
-      <pre>
+      <section className="apod-navigator__cards-section">
+        {apodAPIData?.apodData?.apodElements?.map(
+          (apodElement: APODElement) => (
+            <APODCard {...apodElement} />
+          )
+        )}
+      </section>
+      {/* <pre>
         <code style={{ whiteSpace: "pre-wrap" }}>
           {JSON.stringify(datesData, null, 2)}
           {JSON.stringify(apodAPIData, null, 2)}
         </code>
-      </pre>
+      </pre> */}
     </div>
   )
 }

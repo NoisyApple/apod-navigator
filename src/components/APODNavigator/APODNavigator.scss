@@ -9,6 +9,14 @@
     align-items: center;
   }
 
+  &__cards-section {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: $space-3;
+    padding: 0 $space-4;
+    margin-top: $space-5;
+  }
+
   &__title {
     @extend %h3-sans;
 

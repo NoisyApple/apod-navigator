@@ -1,6 +1,15 @@
 import { createContext, ReactNode, useContext, useReducer } from "react"
 
-const defaultState: { apodData: object } = { apodData: {} }
+const defaultState: { apodData: any } = { apodData: {} }
+
+export type APODElement = {
+  date: string
+  explanation: string
+  hdurl: string
+  media_type: string
+  title: string
+  url: string
+}
 
 export type Action = {
   type: "FETCH_DATA"
