@@ -1,9 +1,12 @@
 import APODNavigator from "./components/APODNavigator/APODNavigator"
+import { SelectedDatesProvider } from "./context/SelectedDatesContext"
 
 function App() {
   return (
     <div className="App">
-      <APODNavigator />
+      <SelectedDatesProvider>
+        <APODNavigator />
+      </SelectedDatesProvider>
     </div>
   )
 }

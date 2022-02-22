@@ -2,9 +2,11 @@ import "./APODNavigator.scss"
 
 import useAPOD from "../../hooks/useAPOD"
 import DateSelector from "./DateSelector/DateSelector"
+import { useSelectedDates } from "../../context/SelectedDatesContext"
 
 const APODNavigator = () => {
   const data = useAPOD("")
+  const { state } = useSelectedDates()
 
   return (
     <div className="apod-navigator">
@@ -22,7 +24,8 @@ const APODNavigator = () => {
       </section>
       <pre>
         <code style={{ whiteSpace: "pre-wrap" }}>
-          {JSON.stringify(data, null, 2)}
+          {/* {JSON.stringify(data, null, 2)} */}
+          {JSON.stringify(state, null, 2)}
         </code>
       </pre>
     </div>

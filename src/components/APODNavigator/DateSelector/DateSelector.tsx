@@ -1,8 +1,10 @@
 import "./DateSelector.scss"
 
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, MouseEvent, useState } from "react"
 
-import { getCurrentDate } from "../../../utils/utils"
+import { getCurrentDate, getDatesBetween } from "../../../utils/utils"
+
+import { useSelectedDates } from "../../../context/SelectedDatesContext"
 
 type formData = {
   isRangeEnabled: boolean
@@ -11,6 +13,8 @@ type formData = {
 }
 
 const DateSelector = () => {
+  const { dispatch } = useSelectedDates()
+
   const [formData, setFormData] = useState<formData>({
     isRangeEnabled: false,
     initialDate: getCurrentDate(),
@@ -25,6 +29,18 @@ const DateSelector = () => {
       ...formData,
       [name]: value,
     })
+  }
+
+  const handleSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
+    const { isRangeEnabled, initialDate, endDate } = formData
+
+    const datesBetween = !isRangeEnabled
+      ? [initialDate]
+      : getDatesBetween(initialDate, endDate)
+
+    dispatch({ type: "SET_DATES", payload: datesBetween })
   }
 
   return (
@@ -80,7 +96,12 @@ const DateSelector = () => {
           </div>
         )}
 
-        <button className="date-selector__submit-button">SUBMIT</button>
+        <button
+          className="date-selector__submit-button"
+          onClick={handleSubmitButtonClick}
+        >
+          SUBMIT
+        </button>
       </form>
       {/* <pre>
         <code>{JSON.stringify(formData, null, 2)}</code>
